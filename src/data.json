@@ -1,0 +1,154 @@
+[
+  {
+    "nombre": "Spider-Man",
+    "editorial": "Marvel",
+    "poderes": "Trepar muros, lanzar telarañas, sentido arácnido",
+    "identidadSecreta": "Peter Parker",
+    "debut": "Amazing Fantasy #15 (1962)",
+    "imagen": "https://example.com/spiderman.jpg"
+  },
+  {
+    "nombre": "Batman",
+    "editorial": "DC",
+    "poderes": "Ninguno, pero tiene habilidades de combate y tecnología avanzada",
+    "identidadSecreta": "Bruce Wayne",
+    "debut": "Detective Comics #27 (1939)",
+    "imagen": "https://example.com/batman.jpg"
+  },
+  {
+    "nombre": "Iron Man",
+    "editorial": "Marvel",
+    "poderes": "Traje de alta tecnología que le otorga fuerza sobrehumana y vuela",
+    "identidadSecreta": "Tony Stark",
+    "debut": "Tales of Suspense #39 (1963)",
+    "imagen": "https://example.com/ironman.jpg"
+  },
+  {
+    "nombre": "Superman",
+    "editorial": "DC",
+    "poderes": "Fuerza sobrehumana, vuelo, visión láser, invulnerabilidad",
+    "identidadSecreta": "Clark Kent",
+    "debut": "Action Comics #1 (1938)",
+    "imagen": "https://example.com/superman.jpg"
+  },
+  {
+    "nombre": "Thor",
+    "editorial": "Marvel",
+    "poderes": "Dios del trueno, controla el clima, posee el martillo Mjolnir",
+    "identidadSecreta": "Thor Odinson",
+    "debut": "Journey into Mystery #83 (1962)",
+    "imagen": "https://example.com/thor.jpg"
+  },
+  {
+    "nombre": "Wonder Woman",
+    "editorial": "DC",
+    "poderes": "Fuerza sobrehumana, habilidades de combate, arma mágica (la Lazo de la Verdad)",
+    "identidadSecreta": "Diana Prince",
+    "debut": "All Star Comics #8 (1941)",
+    "imagen": "https://example.com/wonderwoman.jpg"
+  },
+  {
+    "nombre": "Hulk",
+    "editorial": "Marvel",
+    "poderes": "Fuerza sobrehumana que aumenta con la ira, regeneración",
+    "identidadSecreta": "Bruce Banner",
+    "debut": "The Incredible Hulk #1 (1962)",
+    "imagen": "https://example.com/hulk.jpg"
+  },
+  {
+    "nombre": "Flash",
+    "editorial": "DC",
+    "poderes": "Velocidad sobrehumana, viaje en el tiempo, reflejos mejorados",
+    "identidadSecreta": "Barry Allen",
+    "debut": "Showcase #4 (1956)",
+    "imagen": "https://example.com/flash.jpg"
+  },
+  {
+    "nombre": "Black Widow",
+    "editorial": "Marvel",
+    "poderes": "Experta en artes marciales, espía, posee gadgets",
+    "identidadSecreta": "Natasha Romanoff",
+    "debut": "Tales of Suspense #52 (1964)",
+    "imagen": "https://example.com/blackwidow.jpg"
+  },
+  {
+    "nombre": "Aquaman",
+    "editorial": "DC",
+    "poderes": "Rey de Atlantis, controla la vida marina, puede nadar a gran velocidad",
+    "identidadSecreta": "Arthur Curry",
+    "debut": "More Fun Comics #73 (1941)",
+    "imagen": "https://example.com/aquaman.jpg"
+  },
+  {
+    "nombre": "Captain America",
+    "editorial": "Marvel",
+    "poderes": "Fuerza y agilidad sobrehumana, experto en combate, escudo indestructible",
+    "identidadSecreta": "Steve Rogers",
+    "debut": "Captain America Comics #1 (1941)",
+    "imagen": "https://example.com/captainamerica.jpg"
+  },
+  {
+    "nombre": "Green Lantern",
+    "editorial": "DC",
+    "poderes": "Anillo que crea constructos de energía, vuela, tiene habilidades de combate",
+    "identidadSecreta": "Hal Jordan",
+    "debut": "All-American Comics #16 (1940)",
+    "imagen": "https://example.com/greenlantern.jpg"
+  },
+  {
+    "nombre": "Deadpool",
+    "editorial": "Marvel",
+    "poderes": "Regeneración, habilidades de combate, experto en armas",
+    "identidadSecreta": "Wade Wilson",
+    "debut": "The New Mutants #98 (1991)",
+    "imagen": "https://example.com/deadpool.jpg"
+  },
+  {
+    "nombre": "Cyborg",
+    "editorial": "DC",
+    "poderes": "Tecnología avanzada, fuerza sobrehumana, puede conectarse a computadoras",
+    "identidadSecreta": "Victor Stone",
+    "debut": "DC Comics Presents #26 (1980)",
+    "imagen": "https://example.com/cyborg.jpg"
+  },
+  {
+    "nombre": "Black Panther",
+    "editorial": "Marvel",
+    "poderes": "Rey de Wakanda, experto en combate, tiene habilidades mejoradas",
+    "identidadSecreta": "T'Challa",
+    "debut": "Fantastic Four #52 (1966)",
+    "imagen": "https://example.com/blackpanther.jpg"
+  },
+  {
+    "nombre": "Green Arrow",
+    "editorial": "DC",
+    "poderes": "Experto en el uso del arco y flecha, habilidades de combate",
+    "identidadSecreta": "Oliver Queen",
+    "debut": "More Fun Comics #73 (1941)",
+    "imagen": "https://example.com/greenarrow.jpg"
+  },
+  {
+    "nombre": "Doctor Strange",
+    "editorial": "Marvel",
+    "poderes": "Hechicero supremo, controla la magia, viaja entre dimensiones",
+    "identidadSecreta": "Stephen Strange",
+    "debut": "Strange Tales #110 (1963)",
+    "imagen": "https://example.com/doctorstrange.jpg"
+  },
+  {
+    "nombre": "Martian Manhunter",
+    "editorial": "DC",
+    "poderes": "Fuerza sobrehumana, puede cambiar de forma, telepatía",
+    "identidadSecreta": "J'onn J'onzz",
+    "debut": "Detective Comics #225 (1955)",
+    "imagen": "https://example.com/martianmanhunter.jpg"
+  },
+  {
+    "nombre": "Ant-Man",
+    "editorial": "Marvel",
+    "poderes": "Puede cambiar de tamaño, controlar hormigas",
+    "identidadSecreta": "Scott Lang / Hank Pym",
+    "debut": "Tales to Astonish #27 (1962)",
+    "imagen": "https://example.com/antman.jpg"
+  }
+]
