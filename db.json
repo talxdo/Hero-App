@@ -25,7 +25,7 @@
       "poderes": ["Traje de alta tecnología que le otorga fuerza sobrehumana y vuela"],
       "identidadSecreta": "Tony Stark",
       "debut": "Tales of Suspense #39 (1963)",
-      "imagen": "assets/heroes/Iron Man.png"
+      "imagen": "assets/heroes/IronMan.png"
     },
     {
       "id": "4",
@@ -43,7 +43,7 @@
       "poderes": ["Fuerza sobrehumana", "habilidades de combate", "arma mágica (la Lazo de la Verdad)"],
       "identidadSecreta": "Diana Prince",
       "debut": "All Star Comics #8 (1941)",
-      "imagen": "assets/heroes/Wonder Woman.png"
+      "imagen": "assets/heroes/WonderWoman.png"
     },
     {
       "id": "6",
@@ -70,7 +70,7 @@
       "poderes": ["Experta en artes marciales", "espía", "posee gadgets"],
       "identidadSecreta": "Natasha Romanoff",
       "debut": "Tales of Suspense #52 (1964)",
-      "imagen": "assets/heroes/Black Widow.png"
+      "imagen": "assets/heroes/BlackWidow.png"
     },
     {
       "id": "9",
@@ -88,7 +88,7 @@
       "poderes": ["Fuerza y agilidad sobrehumana", "experto en combate", "escudo indestructible"],
       "identidadSecreta": "Steve Rogers",
       "debut": "Captain America Comics #1 (1941)",
-      "imagen": "assets/heroes/Capitán América.png"
+      "imagen": "assets/heroes/CapitánAmérica.png"
     },
     {
       "id": "11",
@@ -97,7 +97,7 @@
       "poderes": ["Anillo que crea constructos de energía", "vuela", "tiene habilidades de combate"],
       "identidadSecreta": "Hal Jordan",
       "debut": "All-American Comics #16 (1940)",
-      "imagen": "assets/heroes/Linterna Verde.png"
+      "imagen": "assets/heroes/LinternaVerde.png"
     },
     {
       "id": "12",
@@ -115,7 +115,7 @@
       "poderes": ["Rey de Wakanda", "experto en combate", "tiene habilidades mejoradas"],
       "identidadSecreta": "T'Challa",
       "debut": "Fantastic Four #52 (1966)",
-      "imagen": "assets/heroes/Black Panther.png"
+      "imagen": "assets/heroes/BlackPanther.png"
     },
     {
       "id": "14",
@@ -124,7 +124,7 @@
       "poderes": ["Experto en el uso del arco y flecha", "habilidades de combate"],
       "identidadSecreta": "Oliver Queen",
       "debut": "More Fun Comics #73 (1941)",
-      "imagen": "assets/heroes/Green Arrow.png"
+      "imagen": "assets/heroes/GreenArrow.png"
     },
     {
       "id": "15",
@@ -133,7 +133,7 @@
       "poderes": ["Super fuerza", "vuelo", "proyección de energía"],
       "identidadSecreta": "Carol Danvers",
       "debut": "Marvel Super-Heroes #13 (1968)",
-      "imagen": "assets/heroes/Capitana Marvel.png"
+      "imagen": "assets/heroes/CapitanaMarvel.png"
     },
     {
       "id": "16",

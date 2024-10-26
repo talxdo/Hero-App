@@ -4,6 +4,7 @@ import { CreateHeroComponent } from '@components/create-hero/create-hero.compone
 import { HeroDetailsComponent } from '@components/hero-details/hero-details.component';
 import { HeroListComponent } from '@components/hero-list/hero-list.component';
 import { HomeComponent } from '@components/home/home.component';
+import { UpdateHeroComponent } from '@components/update-hero/update-hero.component';
 
 
 export const routes: Routes = [
@@ -12,12 +13,16 @@ export const routes: Routes = [
         component: HeroListComponent
     },
     {
-        path: 'hero',
+        path: 'hero/:id',
         component: HeroDetailsComponent
     },
     {
         path: 'create-hero',
         component: CreateHeroComponent
+    },
+    {
+        path: 'update-hero/:id',
+        component: UpdateHeroComponent
     },
     {
         path: 'home',
