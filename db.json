@@ -13,7 +13,7 @@
       "id": "2",
       "nombre": "Batman",
       "editorial": "DC",
-      "poderes": ["Ninguno"],
+      "poderes": [],
       "identidadSecreta": "Bruce Wayne",
       "debut": "Detective Comics #27 (1939)",
       "imagen": "assets/heroes/Batman.png"
@@ -22,7 +22,12 @@
       "id": "3",
       "nombre": "Iron Man",
       "editorial": "Marvel",
-      "poderes": ["Traje de alta tecnología que le otorga fuerza sobrehumana y vuela"],
+      "poderes": [
+        "Traje de alta tecnología", 
+        "Volar",
+        "Disparo de rayos repulsores",
+        "Inteligencia artificial (J.A.R.V.I.S.)",
+        "Resistencia a daños"],
       "identidadSecreta": "Tony Stark",
       "debut": "Tales of Suspense #39 (1963)",
       "imagen": "assets/heroes/IronMan.png"
@@ -49,7 +54,11 @@
       "id": "6",
       "nombre": "Hulk",
       "editorial": "Marvel",
-      "poderes": ["Fuerza sobrehumana que aumenta con la ira", "regeneración"],
+      "poderes": [
+        "Fuerza sobrehumana",
+        "Regeneración",
+        "Resistencia sobrehumana",
+        "Capacidad de salto extraordinaria"],
       "identidadSecreta": "Bruce Banner",
       "debut": "The Incredible Hulk #1 (1962)",
       "imagen": "assets/heroes/Hulk.png"

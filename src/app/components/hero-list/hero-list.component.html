@@ -1,11 +1,11 @@
-<div class="flex flex-wrap ga-3 justify-center">
+<div class="flex flex-wrap ga-3 justify-center mb-20">
     <h1 class="text-2xl font-bold">Héores</h1>
 
     <div class="flex flex-wrap ga-3 justify-center">
         @for (hero of heroList(); track $index) {
             <div class="bg-white rounded-lg shadow-lg size-fit m-3">
                 <div>
-                    <img class="size-60 p-3 rounded-xg" srcset={{hero.imagen}} alt={{hero.nombre}}>
+                    <img style="view-transition-name: hero;" class="size-60 p-3 rounded-xg" srcset={{hero.imagen}} alt={{hero.nombre}}>
                 </div>
                 <div class="p-3 flex justify-between">
                     <a [routerLink]="['/hero/', hero.id]">
