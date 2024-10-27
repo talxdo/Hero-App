@@ -24,6 +24,10 @@ export class HeroListComponent implements OnInit {
       })
     console.log(this.heroList);
   }
+
+  eliminarHero(){
+    
+  }
   
   
 
