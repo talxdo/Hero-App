@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -20,6 +20,7 @@ export class UpdateHeroComponent implements OnInit{
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private location = inject(Location);
 
   public id: string = "";
   //public hero = signal<Hero | undefined>(undefined);
@@ -55,8 +56,6 @@ export class UpdateHeroComponent implements OnInit{
         }
       
       })
-
-    console.log(this?.hero()?.nombre)
   }
 
   get poderes(): FormArray {
@@ -69,6 +68,10 @@ export class UpdateHeroComponent implements OnInit{
 
   eliminarPoder(id: number){
     this.poderes.removeAt(id);
+  }
+
+  irAtras(){
+    this.location.back();
   }
 
   reiniciarCampos(){

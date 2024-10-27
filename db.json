@@ -244,36 +244,6 @@
       "identidadSecreta": "Mark Grayson",
       "debut": "Invincible #1 (2003)",
       "imagen": "assets/heroes/Invincible.jpg"
-    },
-    {
-      "id": "479e",
-      "nombre": "Iron Man",
-      "editorial": "Marvel",
-      "poderes": [
-        "Traje de alta tecnología",
-        "Volar",
-        "Disparo de rayos repulsores",
-        "Inteligencia artificial (J.A.R.V.I.S.)",
-        "Resistencia a daños"
-      ],
-      "identidadSecreta": "Tony Stark1",
-      "debut": "Tales of Suspense #39 (1963)",
-      "imagen": "assets/heroes/IronMan.png"
-    },
-    {
-      "id": "8e26",
-      "nombre": "Iron Man111",
-      "editorial": "Marvel",
-      "poderes": [
-        "Traje de alta tecnología",
-        "Volar",
-        "Disparo de rayos repulsores",
-        "Inteligencia artificial (J.A.R.V.I.S.)",
-        "Resistencia a daños"
-      ],
-      "identidadSecreta": "Tony Stark",
-      "debut": "Tales of Suspense #39 (1963)",
-      "imagen": "assets/heroes/IronMan.png"
     }
   ]
 }

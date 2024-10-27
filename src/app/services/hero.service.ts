@@ -43,5 +43,9 @@ export class HeroService {
     })
   }
 
+  deleteHero(id: string){
+    return this.http.delete<Hero>(`http://localhost:3000/heroes/${id}`)
+  }
+
   
 }
