@@ -1,8 +1,11 @@
-<div class="flex flex-wrap ga-3 justify-center mb-16">
-    <h1 class="text-2xl font-bold mt-3">Héores</h1>
+<div class="mb-16">
+    <div class="flex flex-wrap ga-3 justify-around">
+        <h1 class="text-3xl font-bold mt-3 text-white">Héroes</h1>
+        <button routerLink="/create-hero" class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Crear</button>
+    </div>
 
     <div class="flex flex-wrap ga-3 justify-center">
-        @for (hero of heroList(); track $index) {
+        @for (hero of heroList() ; track $index) {
             <div class="bg-white rounded-lg shadow-lg size-fit m-3">
                 <div>
                     <img class="size-60 p-3 rounded-xg" srcset={{hero.imagen}} alt={{hero.nombre}}>
@@ -36,7 +39,7 @@
                 </div>
                 <div class="p-3 flex justify-around mb-4">
                     <button [routerLink]="['/update-hero/', hero.id]" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Editar</button>
-                    <button (click)="eliminarHero(hero)" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Eliminar</button>
+                    <button (click)="eliminarHero(hero.id)" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Eliminar</button>
                 </div>
             </div>
         }@empty {

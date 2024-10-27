@@ -9,18 +9,19 @@ import { Observable } from 'rxjs';
 export class HeroService {
 
   private http = inject(HttpClient);
+  private apiUrl = `http://localhost:3000/heroes/`;
 
   getHeroes():Observable<Hero[]>{
-     return this.http.get<Hero[]>(`http://localhost:3000/heroes`);
+     return this.http.get<Hero[]>(this.apiUrl);
     
   }
 
   getHeroById(id: string):Observable<Hero>{
-    return this.http.get<Hero>(`http://localhost:3000/heroes/${id}`);
+    return this.http.get<Hero>(`${this.apiUrl}${id}`);
   }
 
   postHero(data : Hero):Observable<Hero>{
-    return this.http.post<Hero>(`http://localhost:3000/heroes`,
+    return this.http.post<Hero>(this.apiUrl,
       {
         "nombre": data.nombre,
         "editorial": data.editorial,
@@ -33,7 +34,7 @@ export class HeroService {
   }
 
   putHero(data: Hero, id: string):Observable<Hero>{
-    return this.http.put<Hero>(`http://localhost:3000/heroes/${id}`, {
+    return this.http.put<Hero>(`${this.apiUrl}${id}` , {
       "nombre": data.nombre,
         "editorial": data.editorial,
         "poderes": data.poderes,
@@ -44,7 +45,7 @@ export class HeroService {
   }
 
   deleteHero(id: string){
-    return this.http.delete<Hero>(`http://localhost:3000/heroes/${id}`)
+    return this.http.delete<Hero>(`${this.apiUrl}${id}`)
   }
 
   

@@ -233,7 +233,7 @@
       "id": "9db5"
     },
     {
-      "id": "3aba",
+      "id": "97c8",
       "nombre": "Invincible",
       "editorial": "Image Comics",
       "poderes": [
@@ -244,6 +244,19 @@
       "identidadSecreta": "Mark Grayson",
       "debut": "Invincible #1 (2003)",
       "imagen": "assets/heroes/Invincible.jpg"
+    },
+    {
+      "id": "1c3f",
+      "nombre": "Donatello",
+      "editorial": "IDW Publishing",
+      "poderes": [
+        "Inteligencia",
+        "Habilidades tecnológicas",
+        "Maestro en artes marciales"
+      ],
+      "identidadSecreta": "",
+      "debut": "Teenage Mutant Ninja Turtles #1 (1984)",
+      "imagen": "assets/heroes/Donatello.png"
     }
   ]
 }
