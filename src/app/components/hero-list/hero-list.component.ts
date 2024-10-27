@@ -21,12 +21,12 @@ export class HeroListComponent implements OnInit {
     this.heroservice.getHeroes()
       .subscribe(res => {
         this.heroList.set(res);
+        console.log(res);
       })
-    console.log(this.heroList);
   }
 
-  eliminarHero(){
-    
+  eliminarHero(hero : Hero){
+    console.log("Eliminado", hero.nombre)
   }
   
   

@@ -1,1 +1,107 @@
-<p>update-hero works!</p>
+<div class=" p-4 grid place-items-center mb-20">
+    <div class="bg-white shadow-lg rounded-lg p-4 lg:w-96 sm:w-80">
+        <form class="max-w-md mx-auto" [formGroup]="heroFormulario" (ngSubmit)="modificarHero()">
+            <div class="mb-2">
+                <label 
+                    for="nombre" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                <input type="text" 
+                    id="nombre"
+                    formControlName="nombre" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Spider-Man" 
+                    required />
+            </div>
+            <div class="mb-2">
+                <label 
+                    for="editorial" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Editorial</label>
+                <select 
+                    id="editorial" 
+                    formControlName="editorial" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" disabled selected>Selecciona la editorial</option>
+                        <option value="DC">DC Comics</option>
+                        <option value="Marvel">Marvel Comics</option>
+                        <option value="Image Comics">Image Comics</option>
+                        <option value="IDW Publishing">IDW Publishing</option>
+                        <option value="Dark Horse Comics">Dark Horse Comics</option>
+                </select>
+            </div>
+            <!-- <div class="mb-2">
+                <label 
+                for="poderes" 
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poderes / Habilidades</label>
+                <input 
+                type="text" 
+                id="poderes" 
+                formControlName="poderes" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Trepar muros, Lanzar telarañas, Sentido arácnido" 
+                required />
+            </div> -->
+            <div formArrayName="poderes">
+                <label 
+                    for="editorial" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poderes / Habilidades</label>
+                @for (poder of poderes.controls; track $index) {
+                    <div class="flex flex-row mb-2">
+                        <input 
+                        type="text" [formControlName]="$index" 
+                        class="mr-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                        placeholder="Super fuerza" 
+                        required />
+                        <button class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-2 border-b-4 border-red-700 hover:border-red-500 rounded" type="button"  (click)="eliminarPoder($index)">Eliminar</button>
+                    </div>
+                }@empty {
+                    <div class="flex justify-center">
+                        <label class="block mb-2 text-sm font-normal text-gray-900 dark:text-white ml-2">Ninguno.</label>
+                    </div>
+                }
+            </div>
+            <button type="button" class="bg-green-500 hover:bg-green-400 text-white font-bold py-1 px-2 border-b-4 border-green-700 hover:border-green-500 rounded" (click)="agregarPoder()">Adicionar</button>
+            <div class="mb-2">
+                <label 
+                    for="identidadSecreta" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identidad secreta</label>
+                <input 
+                    type="text" 
+                    id="identidadSecreta" 
+                    formControlName="identidadSecreta" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Peter Parker" 
+                    required />
+            </div>
+            <div class="mb-2">
+                <label 
+                    for="debut" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Debut</label>
+                <input 
+                    type="text" 
+                    id="debut" 
+                    formControlName="debut" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Amazing Fantasy #15 (1962)" 
+                    required />
+            </div>
+            <div class="mb-2">
+                <label 
+                    for="imagen" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL de la imagen</label>
+                <input 
+                    type="text" 
+                    id="imagen" 
+                    formControlName="imagen" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="www.images.com/spiderman" 
+                    required />
+            </div>
+        </form>
+        <div class="flex justify-around lg:flex-row sm:flex-col">
+            <button routerLink="/heroes" class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Regresar</button>
+            <button (click)="reiniciarCampos()" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Reiniciar</button>
+            <button (click)="modificarHero()" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Guardar cambios</button>
+        </div>
+    </div>
+</div>
+
