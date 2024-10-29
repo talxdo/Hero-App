@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="mt-2 mb-25">
+    <div class="mb-2">
+        <h1 class="font-bold text-white text-5xl">Descubre a tus Héroes Favoritos</h1>
+    </div>
+
+    <div class="">
+        <h2 class="font-bold text-white text-2xl" >Héroes más populares</h2>
+        <div class="flex flex-wrap ga-3 justify-center p-4">
+        @for (hero of randomHeroList$(); track $index) {
+            <div class="flex flex-col text-center p-4">
+                <img class="size-44 rounded-full" src={{hero.imagen}} alt={{hero.nombre}}>
+                <a [routerLink]="['/hero/', hero.id]" class="font-bold p-2 hover:text-red-600">{{hero.nombre}}</a>
+            </div>
+        }
+        </div>
+    </div>
+</div>
