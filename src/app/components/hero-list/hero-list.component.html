@@ -1,11 +1,35 @@
-<div class="mb-16">
-    <div class="flex flex-wrap ga-3 justify-around">
-        <h1 class="text-3xl font-bold mt-3 text-white">Héroes</h1>
-        <button routerLink="/create-hero" class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Crear</button>
+<div class="mb-20 mt-2">
+    <div class="">
+        <div class="flex justify-between mb-2 lg:mx-28 md:mx-0">
+            <h1 class="text-3xl font-bold mt-2 text-white">Catálogo de héroes</h1>
+            <button routerLink="/create-hero" class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">
+                Agregar héroe
+            </button>
+        </div>
+        <div class="flex lg:justify-end lg:mr-28 md:md-0 md:flex-wrap md:justify-normal">
+            <div class="relative hidden md:block">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                  </svg>
+                  <span class="sr-only">Ícono de búsqueda</span>
+                </div>
+                <input [(ngModel)]="buscar" type="text" id="search-navbar" class="w-72 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar...">
+            </div>
+            <select
+            id="editorial" 
+            [(ngModel)]="criterio"
+            class="ml-1 p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="" disabled selected>Criterios de filtrado</option>
+                <option value="editorial">Editorial</option>
+                <option value="nombre">Nombre</option>
+                <option value="poderes">Poderes</option>
+            </select>
+        </div>
     </div>
 
     <div class="flex flex-wrap ga-3 justify-center">
-        @for (hero of heroList() ; track $index) {
+        @for (hero of heroList() | buscar: buscar : criterio; track $index) {
             <div class="bg-white rounded-lg shadow-lg size-fit m-3">
                 <div>
                     <img class="size-60 p-3 rounded-xg" srcset={{hero.imagen}} alt={{hero.nombre}}>
@@ -17,22 +41,25 @@
                     <span>
                         @switch (hero.editorial) {
                             @case ("Marvel"){
-                                <img class="size-6  w-auto" src="assets/marvel-tag.png" alt="Marvel">
+                                <img class="size-6  w-auto" src="assets/tags/marvel-tag.png" alt="Marvel">
                             }
                             @case ("DC") {
-                                <img class="size-7 w-auto" src="assets/dc-tag.png" alt="DC">
+                                <img class="size-7 w-auto" src="assets/tags/dc-tag.png" alt="DC">
                             }
                             @case ("Image Comics") {
-                                <img class="size-7 w-auto" src="assets/image-tag.png" alt="Image Comics">
+                                <img class="size-7 w-auto" src="assets/tags/image-tag.png" alt="Image Comics">
                             }
                             @case ("IDW Publishing") {
-                                <img class="size-7 w-auto" src="assets/idw-tag.png" alt="IDW Publishing">
+                                <img class="size-7 w-auto" src="assets/tags/idw-tag.png" alt="IDW Publishing">
                             }
                             @case ("Dark Horse Comics") {
-                                <img class="size-7 w-auto" src="assets/dark-horse-tag.png" alt="Dark Horse Comics">
+                                <img class="size-7 w-auto" src="assets/tags/dark-horse-tag.png" alt="Dark Horse Comics">
+                            }
+                            @case ("ICAIC") {
+                                <img class="size-7 w-auto" src="assets/tags/icaiclogo.jpg" alt="ICAIC">
                             }
                             @default {
-                                <p>Editorial desconocida</p>
+                                <p>Editorial desconocida</p>o
                             }
                         }
                     </span>
@@ -46,7 +73,7 @@
             <p>Cargando...</p>
         }
     </div>
-    <div class="mb-4">
+    <div class="mb-4 flex justify-center">
         <p class="font-bold text-lg">¿No encontraste al héroe que buscas? ¡No te preocupes, estamos aquí para ayudarte! <a class="text-red-700 hover:text-red-400" routerLink="/create-hero">Agrega tu héroe favorito a la lista</a></p>
     </div>
 </div>

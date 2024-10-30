@@ -257,6 +257,19 @@
       "identidadSecreta": "",
       "debut": "Teenage Mutant Ninja Turtles #1 (1984)",
       "imagen": "assets/heroes/Donatello.png"
+    },
+    {
+      "id": "1561",
+      "nombre": "Elpidio Valdés",
+      "editorial": "ICAIC",
+      "poderes": [
+        "Astucia",
+        "Liderazgo",
+        "Habilidades de combate"
+      ],
+      "identidadSecreta": "Elpidio Valdés",
+      "debut": "Elpidio Valdés (1970)",
+      "imagen": "assets/heroes/ElPidioValdes.png"
     }
   ]
 }

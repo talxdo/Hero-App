@@ -1,18 +1,19 @@
-<div class="flex col">
-    <div class="w-1/3">
+<div class="flex flex-col md:flex-row p-12">
+    <div class="w-full md:w-1/2 grid place-content-center mb-6 md:mb-0">
         <h1 class="font-bold text-white text-5xl animate-pulse">Héroes que Inspiran</h1>
-        <h3 class=" text-white text-xl">Conoce a los héroes que protegen nuestro mundo</h3>
+        <h3 class="text-white text-xl">Conoce a los héroes que protegen nuestro mundo</h3>
+        <img src="assets/inicio.png" alt="Héroes">
     </div>
 
-    <div class="w-2/3">
-        <h2 class="font-bold text-white text-2xl" >Descubre a tus Héroes Favoritos</h2>
+    <div class="w-full md:w-1/2">
+        <h2 class="font-bold text-white text-2xl">Descubre a tus Héroes Favoritos</h2>
         <div class="flex flex-wrap ga-3 justify-center p-4">
-        @for (hero of randomHeroList$(); track $index) {
-            <div class="flex flex-col text-center p-4">
-                <img [routerLink]="['/hero/', hero.id]" class="hover:cursor-pointer size-44 rounded-full" src={{hero.imagen}} alt={{hero.nombre}}>
-                <a [routerLink]="['/hero/', hero.id]" class="font-bold p-2 hover:text-red-600">{{hero.nombre}}</a>
-            </div>
-        }
+            @for (hero of randomHeroList$(); track $index) {
+                <div class="flex flex-col text-center p-4">
+                    <img [routerLink]="['/hero/', hero.id]" class="hover:cursor-pointer size-44 rounded-full" src={{hero.imagen}} alt={{hero.nombre}}>
+                    <a [routerLink]="['/hero/', hero.id]" class="font-bold p-2 hover:text-blue-600">{{hero.nombre}}</a>
+                </div>
+            }
         </div>
     </div>
 </div>
