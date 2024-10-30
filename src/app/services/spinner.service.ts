@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SpinnerService {
 
-  constructor() { }
+  cargando : boolean = false;
+  
+
 }

@@ -4,6 +4,7 @@ import { HeroDetailsComponent } from '@components/hero-details/hero-details.comp
 import { HeroListComponent } from '@components/hero-list/hero-list.component';
 import { HomeComponent } from '@components/home/home.component';
 import { UpdateHeroComponent } from '@components/update-hero/update-hero.component';
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
 
 
 export const routes: Routes = [
@@ -26,6 +27,9 @@ export const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },{
+        path: 'spin',
+        component: SpinnerComponent
     },
     {
         path: '',

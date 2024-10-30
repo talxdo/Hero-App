@@ -29,18 +29,6 @@
                         <option value="Dark Horse Comics">Dark Horse Comics</option>
                 </select>
             </div>
-            <!-- <div class="mb-2">
-                <label 
-                for="poderes" 
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poderes / Habilidades</label>
-                <input 
-                type="text" 
-                id="poderes" 
-                formControlName="poderes" 
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="Trepar muros, Lanzar telarañas, Sentido arácnido" 
-                required />
-            </div> -->
             <div formArrayName="poderes">
                 <label 
                     for="editorial" 
@@ -107,7 +95,7 @@
         <div class="flex justify-around flex-col">
             <button (click)="irAtras()" class="mb-2 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Regresar</button>
             <button (click)="reiniciarCampos()" class="mb-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Reiniciar</button>
-            <button (click)="modificarHero()" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Guardar cambios</button>
+            <button [disabled]="heroFormulario.invalid" (click)="modificarHero()" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded disabled:border-gray-500 disabled:bg-gray-400">Guardar cambios</button>
         </div>
     </div>
 </div>
