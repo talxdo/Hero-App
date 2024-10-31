@@ -30,13 +30,15 @@ export class HeroListComponent implements OnInit {
   ngOnInit(): void {
     this.cargando = true;
     this.heroservice.getHeroes()
-      .pipe(
-        delay(2000)
-      )
-      .subscribe(res => {
-        this.heroList.update(() => res);
+      .subscribe(
+        res => {
+          this.heroList.update(() => res);
+          this.cargando = false;
+        //console.log(res);
+      },
+      err => {
         this.cargando = false;
-        console.log(res);
+        console.error(err);
       })
   }
 
@@ -46,10 +48,15 @@ export class HeroListComponent implements OnInit {
       switchMap(() => { 
         return this.heroservice.getHeroes(); 
       })
-    ).subscribe(updatedHeroes => {
-      this.heroList.update(() => updatedHeroes);
-      this.cargando = false;
-      console.log(updatedHeroes);
-  })}
+    ).subscribe(
+      updatedHeroes => {
+        this.heroList.update(() => updatedHeroes);
+        this.cargando = false;
+        //console.log(updatedHeroes);
+  },
+      err => {
+        this.cargando = false;
+        console.error(err);
+      })}
   
 }

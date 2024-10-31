@@ -1,29 +1,40 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Hero } from '@interfaces/Hero';
 import { HeroService } from '@services/hero.service';
+import { SpinnerService } from '@services/spinner.service';
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
 import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SpinnerComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
 
   heroservice = inject(HeroService);
+  private spinnerservice = inject(SpinnerService);
+
+  cargando = this.spinnerservice.cargando;
 
   randomHeroList$ = signal<Hero[]>([]);
   
   ngOnInit(): void {
+    this.cargando = true;
     this.sieteHeroesRandom().subscribe(
       heroes => {
         this.randomHeroList$.update(() => heroes);
-        console.log(heroes);
-    })
-    console.log()
+        this.cargando = false;
+        //console.log(heroes);
+      },
+      err => {
+        this.cargando = false;
+        console.error(err);
+      })
   }
 
   sieteHeroesRandom(){

@@ -170,18 +170,6 @@
       "imagen": "assets/heroes/BlackPanther.png"
     },
     {
-      "id": "14",
-      "nombre": "Green Arrow",
-      "editorial": "DC",
-      "poderes": [
-        "Experto en el uso del arco y flecha",
-        "habilidades de combate"
-      ],
-      "identidadSecreta": "Oliver Queen",
-      "debut": "More Fun Comics #73 (1941)",
-      "imagen": "assets/heroes/GreenArrow.png"
-    },
-    {
       "id": "15",
       "nombre": "Capitana Marvel",
       "editorial": "Marvel",

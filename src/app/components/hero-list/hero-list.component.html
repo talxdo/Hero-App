@@ -59,7 +59,7 @@
                                 <img class="size-7 w-auto" src="assets/tags/icaiclogo.jpg" alt="ICAIC">
                             }
                             @default {
-                                <p>Editorial desconocida</p>o
+                                <p>Editorial desconocida</p>
                             }
                         }
                     </span>
@@ -69,11 +69,6 @@
                     <button (click)="eliminarHero(hero.id)" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Eliminar</button>
                 </div>
             </div>
-        }@empty {
-            <p>Cargando...</p>
-            <div class="spinner-container" *ngIf="cargando">
-                <app-spinner></app-spinner>
-            </div>
         }
     </div>
     <div class="mb-4 flex justify-center">
@@ -81,3 +76,6 @@
     </div>
 </div>
 
+<div class="flex justify-center" *ngIf="cargando">
+    <app-spinner></app-spinner>
+</div>

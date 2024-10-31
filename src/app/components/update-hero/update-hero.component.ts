@@ -5,12 +5,14 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Va
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hero } from '@interfaces/Hero';
 import { HeroService } from '@services/hero.service';
+import { SpinnerService } from '@services/spinner.service';
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
 import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-update-hero',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
   templateUrl: './update-hero.component.html',
   styleUrl: './update-hero.component.css'
 })
@@ -19,8 +21,10 @@ export class UpdateHeroComponent implements OnInit{
   private heroservice = inject(HeroService);
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private location = inject(Location);
+  private spinnerservice = inject(SpinnerService);
+
+  cargando = this.spinnerservice.cargando;
 
   public id: string = "";
   //public hero = signal<Hero | undefined>(undefined);
@@ -41,21 +45,27 @@ export class UpdateHeroComponent implements OnInit{
   })
 
   ngOnInit(): void {
+    this.cargando = true;
     this.id = this.route.snapshot.params['id'];
     this.heroservice.getHeroById(this.id)
-      .subscribe(res => {
-        this.heroFormulario.get('nombre')?.setValue(res.nombre);
-        this.heroFormulario.get('editorial')?.setValue(res.editorial);
-        this.heroFormulario.get('identidadSecreta')?.setValue(res.identidadSecreta);
-        this.heroFormulario.get('debut')?.setValue(res.debut);
-        this.heroFormulario.get('imagen')?.setValue(res.imagen);
-        if(res.poderes){
-          res.poderes.forEach(poder => {
-            this.poderes.push(this.fb.control(poder, Validators.required));
-          })
-        }
-      
-      })
+      .subscribe(
+        res => {
+          this.cargando = false;
+          this.heroFormulario.get('nombre')?.setValue(res.nombre);
+          this.heroFormulario.get('editorial')?.setValue(res.editorial);
+          this.heroFormulario.get('identidadSecreta')?.setValue(res.identidadSecreta);
+          this.heroFormulario.get('debut')?.setValue(res.debut);
+          this.heroFormulario.get('imagen')?.setValue(res.imagen);
+          if(res.poderes){
+            res.poderes.forEach(poder => {
+              this.poderes.push(this.fb.control(poder, Validators.required));
+            })
+          }
+        
+        },err => {
+          this.cargando = false;
+          console.error(err);
+        })
   }
 
   get poderes(): FormArray {
@@ -87,6 +97,7 @@ export class UpdateHeroComponent implements OnInit{
   }
 
   modificarHero(){
+    this.cargando = true;
     let poderesHero = 
     this.heroFormulario.get('poderes')?.value || [];
     let nombreHero = 
@@ -112,7 +123,12 @@ export class UpdateHeroComponent implements OnInit{
     //console.log(hero);
 
     this.heroservice.putHero(hero, this.id)
-    .subscribe(res => console.log(res));
-    this.router.navigate(['/heroes:']);
+    .subscribe(
+        res => this.cargando = false,
+        err => {
+          this.cargando = false;
+          console.error(err);
+        });
+    this.location.back();
   }
 }

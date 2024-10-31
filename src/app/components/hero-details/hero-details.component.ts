@@ -4,21 +4,25 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hero } from '@interfaces/Hero';
 import { HeroService } from '@services/hero.service';
+import { SpinnerService } from '@services/spinner.service';
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
 import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-hero-details',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, SpinnerComponent],
   templateUrl: './hero-details.component.html',
   styleUrl: './hero-details.component.css'
 })
 export class HeroDetailsComponent implements OnInit{
   
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private heroservice = inject(HeroService);
   private location = inject(Location);
+  private spinnerservice = inject(SpinnerService);
+
+  cargando = this.spinnerservice.cargando;
 
   public hero = toSignal<Hero>(
     this.route.params
@@ -38,9 +42,16 @@ export class HeroDetailsComponent implements OnInit{
   }
 
   eliminarHeroe(){
+    this.cargando = true;
     this.heroservice.deleteHero(this.id)
-      .subscribe(res => console.log(res))
-    this.router.navigate(["/heroes/"])
+      .subscribe(
+        res => this.cargando = false,
+        err => {
+          this.cargando = false;
+          console.error(err);
+        }
+      )
+      this.location.back();
   }
 
 }

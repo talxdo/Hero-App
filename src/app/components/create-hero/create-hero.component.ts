@@ -4,18 +4,23 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeroService } from '@services/hero.service';
 import { Hero } from '@interfaces/Hero';
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
+import { SpinnerService } from '@services/spinner.service';
 
 @Component({
   selector: 'app-create-hero',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
   templateUrl: './create-hero.component.html',
   styleUrl: './create-hero.component.css'
 })
 export class CreateHeroComponent{
 
   private heroservice = inject(HeroService);
+  private spinnerservice = inject(SpinnerService);
   private fb = inject(FormBuilder);
+
+  cargando = this.spinnerservice.cargando;
 
   public heroFormulario: FormGroup = new FormGroup({
     'nombre': new FormControl('', Validators.required),
@@ -76,10 +81,15 @@ export class CreateHeroComponent{
       
     }
     //console.log(hero);
-
+    this.cargando = true;
     this.heroservice.postHero(hero)
-    .subscribe(res => console.log(res));
-    this.reiniciarCampos();
-  }
+    .subscribe(
+      res => this.cargando = false,
+      err => {
+        this.cargando = false;
+        console.error(err);
+      });
+      this.reiniciarCampos();
+    }
 
 }
