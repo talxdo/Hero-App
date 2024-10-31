@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideExperimentalZonelessChangeDetection, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -7,14 +7,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    //provideZoneChangeDetection({ eventCoalescing: true }),
     provideExperimentalZonelessChangeDetection(),
     provideRouter(
       routes,
       withViewTransitions({
         skipInitialTransition: true
       })
-    ), 
+    ),
     provideHttpClient(
       withFetch()), provideAnimationsAsync()]
 };

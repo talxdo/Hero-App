@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { HeroService } from '@services/hero.service';
-import { Hero } from '@interfaces/Hero';
-import { SpinnerComponent } from '@shared/spinner/spinner.component';
-import { SpinnerService } from '@services/spinner.service';
+import {Component, inject, input, computed, signal} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {finalize} from "rxjs";
+
+import {HeroService} from '@services/hero.service';
+import {Hero} from '@interfaces/hero';
+import {SpinnerComponent} from '@shared/spinner/spinner.component';
+
 
 @Component({
   selector: 'app-create-hero',
@@ -14,39 +16,40 @@ import { SpinnerService } from '@services/spinner.service';
   templateUrl: './create-hero.component.html',
   styleUrl: './create-hero.component.css'
 })
-export class CreateHeroComponent{
+export class CreateHeroComponent {
+
+  title = input<string>('Crear Héroe');
+  hero = input<Hero | undefined>();
+  #cargando = signal(false)
+  isLoading = computed(() => this.#cargando())
 
   private heroservice = inject(HeroService);
-  private spinnerservice = inject(SpinnerService);
   private fb = inject(FormBuilder);
 
-  cargando = this.spinnerservice.cargando;
-
-  public heroFormulario: FormGroup = new FormGroup({
-    'nombre': new FormControl('', Validators.required),
-    'editorial': new FormControl('', Validators.required),
-    'poderes': this.fb.array([], Validators.required),
-    'identidadSecreta': new FormControl('', Validators.required),
-    'debut': new FormControl('', Validators.required),
-    'imagen': new FormControl('', Validators.required),
-  })
-
-
+  heroFormulario = computed<FormGroup>(() =>
+    new FormGroup({
+      'nombre': new FormControl(this.hero()?.nombre ?? '', Validators.required),
+      'editorial': new FormControl(this.hero()?.editorial ?? '', Validators.required),
+      'poderes': this.fb.array([new FormControl(this.hero()?.poderes[0] ?? '', Validators.required)], Validators.required),
+      'identidadSecreta': new FormControl(this.hero()?.identidadSecreta ?? '', Validators.required),
+      'debut': new FormControl(this.hero()?.debut ?? '', Validators.required),
+      'imagen': new FormControl(this.hero()?.imagen ?? '', Validators.required),
+    }));
 
   get poderes(): FormArray {
-    return this.heroFormulario.get('poderes') as FormArray;
+    return this.heroFormulario()?.get('poderes') as FormArray;
   }
 
-  agregarPoder(){
+  agregarPoder() {
     this.poderes.push(this.fb.control('', Validators.required))
   }
 
-  eliminarPoder(id: number){
+  eliminarPoder(id: number) {
     this.poderes.removeAt(id);
   }
 
-  reiniciarCampos(){
-    this.heroFormulario.reset({
+  reiniciarCampos() {
+    this.heroFormulario()?.reset({
       nombre: '',
       editorial: '',
       poderes: '',
@@ -54,42 +57,32 @@ export class CreateHeroComponent{
       debut: '',
       imagen: ''
     });
-    console.log("reiniciar");
   }
 
-  crearHero(){
-    let poderesHero = 
-    this.heroFormulario.get('poderes')?.value || [];
-    let nombreHero = 
-      this.heroFormulario.get('nombre')?.value?.toString() || '';
-    let editorialHero = 
-      this.heroFormulario.get('editorial')?.value?.toString() || '';
-    let identidadSecretaHero = 
-      this.heroFormulario.get('identidadSecreta')?.value?.toString() || '';
-    let debutHero = 
-      this.heroFormulario.get('debut')?.value?.toString() || '';
-    let imagenHero = 
-      this.heroFormulario.get('imagen')?.value?.toString() || '';
-    
-    let hero : Hero = {
+  crearHero() {
+    const poderesHero = this.heroFormulario()?.get('poderes')?.value || [];
+    const nombreHero = this.heroFormulario()?.get('nombre')?.value?.toString() || '';
+    const editorialHero = this.heroFormulario()?.get('editorial')?.value?.toString() || '';
+    const identidadSecretaHero = this.heroFormulario()?.get('identidadSecreta')?.value?.toString() || '';
+    const debutHero = this.heroFormulario()?.get('debut')?.value?.toString() || '';
+    const imagenHero = this.heroFormulario()?.get('imagen')?.value?.toString() || '';
+
+    const hero: Hero = {
       nombre: nombreHero,
       editorial: editorialHero,
       poderes: poderesHero,
       identidadSecreta: identidadSecretaHero,
       debut: debutHero,
-      imagen : imagenHero
-      
+      imagen: imagenHero
+
     }
-    //console.log(hero);
-    this.cargando = true;
+    this.#cargando.set(true);
     this.heroservice.postHero(hero)
-    .subscribe(
-      res => this.cargando = false,
-      err => {
-        this.cargando = false;
-        console.error(err);
+      .pipe(finalize(() => this.#cargando.set(true)))
+      .subscribe({
+        error: err => console.error(err)
       });
-      this.reiniciarCampos();
-    }
+    this.reiniciarCampos();
+  }
 
 }

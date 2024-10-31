@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Hero } from '@interfaces/Hero';
+import { Hero } from '@interfaces/hero';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class HeroService {
 
   getHeroes():Observable<Hero[]>{
      return this.http.get<Hero[]>(this.apiUrl);
-    
+
   }
 
   getHeroById(id: string):Observable<Hero>{
@@ -48,5 +48,5 @@ export class HeroService {
     return this.http.delete<Hero>(`${this.apiUrl}${id}`)
   }
 
-  
+
 }

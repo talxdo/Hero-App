@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Hero } from '@interfaces/Hero';
+import { Hero } from '@interfaces/hero';
 
 @Pipe({
   name: 'buscar',
@@ -8,7 +8,7 @@ import { Hero } from '@interfaces/Hero';
 export class BuscarPipe implements PipeTransform {
 
   transform(Listado: Hero[], valor: string, criterio : string): Hero[] {
-    
+
     if(!criterio){
       return Listado;
     }

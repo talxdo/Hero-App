@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Hero } from '@interfaces/Hero';
+import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
 import { SpinnerService } from '@services/spinner.service';
 import { SpinnerComponent } from '@shared/spinner/spinner.component';
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit{
   cargando = this.spinnerservice.cargando;
 
   randomHeroList$ = signal<Hero[]>([]);
-  
+
   ngOnInit(): void {
     this.cargando = true;
     this.sieteHeroesRandom().subscribe(
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit{
   heroListDesordenado(arregloHeroes: Hero[]) : Hero[]{
     for (let index = arregloHeroes.length - 1 ; index > 0; index--) {
       const nuevo_index = Math.floor(Math.random() * (index + 1));
-      [arregloHeroes[index], arregloHeroes[nuevo_index]] = [arregloHeroes[nuevo_index], arregloHeroes[index]]; 
+      [arregloHeroes[index], arregloHeroes[nuevo_index]] = [arregloHeroes[nuevo_index], arregloHeroes[index]];
     }
     return arregloHeroes;
   }

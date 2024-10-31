@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, NgModule, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Hero } from '@interfaces/Hero';
+import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
 import { delay, switchMap } from 'rxjs';
 import { BuscarPipe } from '../../pipes/buscar.pipe';
@@ -45,8 +45,8 @@ export class HeroListComponent implements OnInit {
   eliminarHero(id : any){
     this.cargando = true;
     this.heroservice.deleteHero(id).pipe(
-      switchMap(() => { 
-        return this.heroservice.getHeroes(); 
+      switchMap(() => {
+        return this.heroservice.getHeroes();
       })
     ).subscribe(
       updatedHeroes => {
@@ -58,5 +58,5 @@ export class HeroListComponent implements OnInit {
         this.cargando = false;
         console.error(err);
       })}
-  
+
 }

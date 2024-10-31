@@ -1,134 +1,23 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Hero } from '@interfaces/Hero';
-import { HeroService } from '@services/hero.service';
-import { SpinnerService } from '@services/spinner.service';
-import { SpinnerComponent } from '@shared/spinner/spinner.component';
-import { switchMap } from 'rxjs';
+import {Component, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {ActivatedRoute} from '@angular/router';
+import {switchMap} from 'rxjs';
+
+import {Hero} from '@interfaces/hero';
+import {HeroService} from '@services/hero.service';
+import {CreateHeroComponent} from "@components/create-hero/create-hero.component";
+
 
 @Component({
   selector: 'app-update-hero',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
+  imports: [CreateHeroComponent],
   templateUrl: './update-hero.component.html',
   styleUrl: './update-hero.component.css'
 })
-export class UpdateHeroComponent implements OnInit{
+export class UpdateHeroComponent {
 
-  private heroservice = inject(HeroService);
-  private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
-  private location = inject(Location);
-  private spinnerservice = inject(SpinnerService);
-
-  cargando = this.spinnerservice.cargando;
-
-  public id: string = "";
-  //public hero = signal<Hero | undefined>(undefined);
-  public hero = toSignal(
-    this.route.params
-      .pipe(
-        switchMap(({id}) => this.heroservice.getHeroById(id))
-      )
-  )
-  
-  public heroFormulario: FormGroup = new FormGroup({
-    'nombre': new FormControl('', Validators.required),
-    'editorial': new FormControl('', Validators.required),
-    'poderes': this.fb.array([], Validators.required),
-    'identidadSecreta': new FormControl('', Validators.required),
-    'debut': new FormControl('', Validators.required),
-    'imagen': new FormControl('', Validators.required),
-  })
-
-  ngOnInit(): void {
-    this.cargando = true;
-    this.id = this.route.snapshot.params['id'];
-    this.heroservice.getHeroById(this.id)
-      .subscribe(
-        res => {
-          this.cargando = false;
-          this.heroFormulario.get('nombre')?.setValue(res.nombre);
-          this.heroFormulario.get('editorial')?.setValue(res.editorial);
-          this.heroFormulario.get('identidadSecreta')?.setValue(res.identidadSecreta);
-          this.heroFormulario.get('debut')?.setValue(res.debut);
-          this.heroFormulario.get('imagen')?.setValue(res.imagen);
-          if(res.poderes){
-            res.poderes.forEach(poder => {
-              this.poderes.push(this.fb.control(poder, Validators.required));
-            })
-          }
-        
-        },err => {
-          this.cargando = false;
-          console.error(err);
-        })
-  }
-
-  get poderes(): FormArray {
-    return this.heroFormulario.get('poderes') as FormArray;
-  }
-
-  agregarPoder(){
-    this.poderes.push(this.fb.control('', Validators.required))
-  }
-
-  eliminarPoder(id: number){
-    this.poderes.removeAt(id);
-  }
-
-  irAtras(){
-    this.location.back();
-  }
-
-  reiniciarCampos(){
-    this.heroFormulario.reset({
-      nombre: '',
-      editorial: '',
-      poderes: '',
-      identidadSecreta: '',
-      debut: '',
-      imagen: ''
-    });
-    console.log("reiniciar");
-  }
-
-  modificarHero(){
-    this.cargando = true;
-    let poderesHero = 
-    this.heroFormulario.get('poderes')?.value || [];
-    let nombreHero = 
-      this.heroFormulario.get('nombre')?.value?.toString() || '';
-    let editorialHero = 
-      this.heroFormulario.get('editorial')?.value?.toString() || '';
-    let identidadSecretaHero = 
-      this.heroFormulario.get('identidadSecreta')?.value?.toString() || '';
-    let debutHero = 
-      this.heroFormulario.get('debut')?.value?.toString() || '';
-    let imagenHero = 
-      this.heroFormulario.get('imagen')?.value?.toString() || '';
-    
-    let hero : Hero = {
-      nombre: nombreHero,
-      editorial: editorialHero,
-      poderes: poderesHero,
-      identidadSecreta: identidadSecretaHero,
-      debut: debutHero,
-      imagen : imagenHero
-      
-    }
-    //console.log(hero);
-
-    this.heroservice.putHero(hero, this.id)
-    .subscribe(
-        res => this.cargando = false,
-        err => {
-          this.cargando = false;
-          console.error(err);
-        });
-    this.location.back();
-  }
+  private heroService = inject(HeroService)
+  public hero = toSignal<Hero>(this.route.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
 }

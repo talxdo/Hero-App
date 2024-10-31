@@ -2,7 +2,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Hero } from '@interfaces/Hero';
+import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
 import { SpinnerService } from '@services/spinner.service';
 import { SpinnerComponent } from '@shared/spinner/spinner.component';
@@ -16,7 +16,7 @@ import { switchMap } from 'rxjs';
   styleUrl: './hero-details.component.css'
 })
 export class HeroDetailsComponent implements OnInit{
-  
+
   private route = inject(ActivatedRoute);
   private heroservice = inject(HeroService);
   private location = inject(Location);

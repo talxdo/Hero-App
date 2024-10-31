@@ -258,6 +258,28 @@
       "identidadSecreta": "Elpidio Valdés",
       "debut": "Elpidio Valdés (1970)",
       "imagen": "assets/heroes/ElPidioValdes.png"
+    },
+    {
+      "id": "c954",
+      "nombre": "Pedro",
+      "editorial": "ICAIC",
+      "poderes": [
+        "sefse"
+      ],
+      "identidadSecreta": "rtyr",
+      "debut": "dfdf",
+      "imagen": "dfgd"
+    },
+    {
+      "id": "ef36",
+      "nombre": "prueba",
+      "editorial": "ICAIC",
+      "poderes": [
+        "3"
+      ],
+      "identidadSecreta": "wsdfawws",
+      "debut": "qwerfqwe",
+      "imagen": "qwefqwe"
     }
   ]
 }
