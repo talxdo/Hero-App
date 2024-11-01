@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, NgModule, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { finalize, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+
 import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
-import { delay, switchMap } from 'rxjs';
 import { BuscarPipe } from '../../pipes/buscar.pipe';
-import { FormsModule } from '@angular/forms';
-import { SpinnerService } from '@services/spinner.service';
 import { SpinnerComponent } from '@shared/spinner/spinner.component';
 
 @Component({
@@ -18,45 +18,41 @@ import { SpinnerComponent } from '@shared/spinner/spinner.component';
 })
 export class HeroListComponent implements OnInit {
 
-  private heroservice = inject(HeroService);
-  private spinnerservice = inject(SpinnerService);
+  private heroService = inject(HeroService);
 
-  cargando = this.spinnerservice.cargando;
+  #loading = signal(false);
+  isLoading = computed(() => this.#loading())
 
   heroList = signal<Hero[]>([]);
-  buscar : string = "";
+  searchInput : string = "";
   criterio : string = "";
 
   ngOnInit(): void {
-    this.cargando = true;
-    this.heroservice.getHeroes()
-      .subscribe(
-        res => {
-          this.heroList.update(() => res);
-          this.cargando = false;
-        //console.log(res);
-      },
-      err => {
-        this.cargando = false;
-        console.error(err);
-      })
+    this.#loading.set(true);
+    this.heroService.getHeroes()
+      .pipe(
+        finalize(() => this.#loading.set(false))
+      )
+      .subscribe({
+        next : res => this.heroList.set(res),
+        error: err => console.error(err)
+      }
+      )
   }
 
-  eliminarHero(id : any){
-    this.cargando = true;
-    this.heroservice.deleteHero(id).pipe(
+  deleteHero(id : any){
+    this.#loading.set(true);
+    this.heroService.deleteHero(id)
+    .pipe(
       switchMap(() => {
-        return this.heroservice.getHeroes();
-      })
-    ).subscribe(
-      updatedHeroes => {
-        this.heroList.update(() => updatedHeroes);
-        this.cargando = false;
-        //console.log(updatedHeroes);
-  },
-      err => {
-        this.cargando = false;
-        console.error(err);
-      })}
+        return this.heroService.getHeroes();
+      }),
+      finalize(() => this.#loading.set(false))            
+    )
+    .subscribe({
+      next: res => this.heroList.set(res),
+      error: err => console.error(err)
+    }
+    )}
 
 }

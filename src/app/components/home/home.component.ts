@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { finalize, map, take } from 'rxjs';
+
 import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
-import { SpinnerService } from '@services/spinner.service';
 import { SpinnerComponent } from '@shared/spinner/spinner.component';
-import { map, take } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -16,40 +17,37 @@ import { map, take } from 'rxjs';
 })
 export class HomeComponent implements OnInit{
 
-  heroservice = inject(HeroService);
-  private spinnerservice = inject(SpinnerService);
+  heroService = inject(HeroService);
 
-  cargando = this.spinnerservice.cargando;
+  #loading = signal(false);
+  isLoading = computed(() => this.#loading());
 
   randomHeroList$ = signal<Hero[]>([]);
 
   ngOnInit(): void {
-    this.cargando = true;
-    this.sieteHeroesRandom().subscribe(
-      heroes => {
-        this.randomHeroList$.update(() => heroes);
-        this.cargando = false;
-        //console.log(heroes);
-      },
-      err => {
-        this.cargando = false;
-        console.error(err);
-      })
+    this.#loading.set(true);
+    this.sevenRandomHeroes()
+      .pipe(finalize(()=> this.#loading.set(false))
+      )
+      .subscribe({
+        next: res => this.randomHeroList$.update(value => value = res),
+        error: err => console.error(err)
+      })    
   }
 
-  sieteHeroesRandom(){
-    return this.heroservice.getHeroes().pipe(
-      map((heroes) => this.heroListDesordenado(heroes)),
+  sevenRandomHeroes(){
+    return this.heroService.getHeroes().pipe(
+      map((heroes) => this.shuffleHeroList(heroes)),
       map((heroes_random) => heroes_random.slice(0, 6)),
       take(1)
     );
   }
 
-  heroListDesordenado(arregloHeroes: Hero[]) : Hero[]{
-    for (let index = arregloHeroes.length - 1 ; index > 0; index--) {
+  shuffleHeroList(heroArray: Hero[]) : Hero[]{
+    for (let index = heroArray.length - 1 ; index > 0; index--) {
       const nuevo_index = Math.floor(Math.random() * (index + 1));
-      [arregloHeroes[index], arregloHeroes[nuevo_index]] = [arregloHeroes[nuevo_index], arregloHeroes[index]];
+      [heroArray[index], heroArray[nuevo_index]] = [heroArray[nuevo_index], heroArray[index]];
     }
-    return arregloHeroes;
+    return heroArray;
   }
 }

@@ -5,13 +5,13 @@ import {switchMap} from 'rxjs';
 
 import {Hero} from '@interfaces/hero';
 import {HeroService} from '@services/hero.service';
-import {CreateHeroComponent} from "@components/create-hero/create-hero.component";
+import { HeroFormComponent } from '@components/hero-form/hero-form.component';
 
 
 @Component({
   selector: 'app-update-hero',
   standalone: true,
-  imports: [CreateHeroComponent],
+  imports: [HeroFormComponent],
   templateUrl: './update-hero.component.html',
   styleUrl: './update-hero.component.css'
 })
@@ -20,4 +20,5 @@ export class UpdateHeroComponent {
   private route = inject(ActivatedRoute);
   private heroService = inject(HeroService)
   public hero = toSignal<Hero>(this.route.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
+
 }
