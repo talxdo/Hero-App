@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.open()
     this.sevenRandomHeroes()
-      .pipe(delay(5000), finalize(() => this.loadingService.close()))
+      .pipe(delay(500), finalize(() => this.loadingService.close()))
       .subscribe({
         next: res => this.randomHeroList$.set(res),
         error: err => console.error(err)

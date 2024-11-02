@@ -11,7 +11,7 @@ import {Dialog} from "@angular/cdk/dialog";
 export class SpinnerService {
 
   dialogRef: MatDialogRef<SpinnerComponent> = inject(MatDialog).open(SpinnerComponent, {
-    disableClose: true, height: '200px'
+    disableClose: true, height: '200px', panelClass: 'transparent-dialog', 
   });
 
   open() {
