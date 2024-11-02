@@ -1,5 +1,5 @@
 import {Component, inject, input, computed, signal} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, RequiredValidator, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {finalize} from "rxjs";
@@ -69,6 +69,7 @@ export class HeroFormComponent {
       const imagenHero = this.heroFormulario()?.get('imagen')?.value?.toString() || '';
       
       const id = this.hero()?.id || '';
+      
       const hero: Hero = {
         nombre: nombreHero,
         editorial: editorialHero,

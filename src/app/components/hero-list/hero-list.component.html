@@ -30,7 +30,7 @@
         </div>
     
         <div class="flex flex-wrap ga-3 justify-center">
-            @for (hero of heroList() | buscar: searchInput : criterio; track $index) {
+            @for (hero of heroList() | buscar: searchInput : criterio; track hero) {
                 <div class="bg-white rounded-lg shadow-lg size-fit m-3">
                     <div>
                         <img class="size-60 p-3 rounded-xg" srcset={{hero.imagen}} alt={{hero.nombre}}>
