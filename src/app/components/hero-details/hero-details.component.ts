@@ -20,15 +20,17 @@ export class HeroDetailsComponent implements OnInit{
   #loading = signal(false);
   isLoading = computed(() => this.#loading())
 
-  private route = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);
   private heroService = inject(HeroService);
   private router = inject(Router);
 
-  public id?: string;
-  public hero = toSignal<Hero>(this.route.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
+  public id = signal<string>('');
+  public hero = toSignal<Hero>(this.activatedRoute.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
 
   ngOnInit(): void {
-    this.id = this.hero()?.id;
+    this.activatedRoute.params.subscribe(
+      params => this.id.set(params['id'])
+    )
   }
 
   goBack(){
