@@ -15,6 +15,10 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
     path: 'heroes',
     component: HeroListComponent
   },
@@ -31,10 +35,6 @@ export const routes: Routes = [
     path: 'update-hero/:id',
     component: UpdateHeroComponent,
     resolve: { hero: getHeroResolver }
-  },
-  {
-    path: 'home',
-    component: HomeComponent
   },
   {
     path: '**',

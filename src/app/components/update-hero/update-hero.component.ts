@@ -1,10 +1,6 @@
-import {Component, inject, input} from '@angular/core';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs';
+import {Component, input} from '@angular/core';
 
 import {Hero} from '@interfaces/hero';
-import {HeroService} from '@services/hero.service';
 import { HeroFormComponent } from '@components/hero-form/hero-form.component';
 
 
