@@ -4,6 +4,7 @@ import {HeroDetailsComponent} from '@components/hero-details/hero-details.compon
 import {HeroListComponent} from '@components/hero-list/hero-list.component';
 import {HomeComponent} from '@components/home/home.component';
 import {UpdateHeroComponent} from '@components/update-hero/update-hero.component';
+import {getHeroResolver} from "./resolver/get-hero.resolver";
 
 
 export const routes: Routes = [
@@ -19,7 +20,8 @@ export const routes: Routes = [
   },
   {
     path: 'hero/:id',
-    component: HeroDetailsComponent
+    component: HeroDetailsComponent,
+    resolve: { hero: getHeroResolver }
   },
   {
     path: 'create-hero',
@@ -27,7 +29,8 @@ export const routes: Routes = [
   },
   {
     path: 'update-hero/:id',
-    component: UpdateHeroComponent
+    component: UpdateHeroComponent,
+    resolve: { hero: getHeroResolver }
   },
   {
     path: 'home',

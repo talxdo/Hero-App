@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import {provideRouter, withComponentInputBinding, withViewTransitions} from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -10,6 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideExperimentalZonelessChangeDetection(),
     provideRouter(
       routes,
+      withComponentInputBinding(),
       withViewTransitions({
         skipInitialTransition: true
       })

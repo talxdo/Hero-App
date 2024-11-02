@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Hero } from '@interfaces/hero';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class HeroService {
 
   }
 
-  getHeroById(id: string):Observable<Hero>{
+  getHeroById(id: string):Observable<Hero | null>{
+    if (!id) return of(null)
     return this.http.get<Hero>(`${this.apiUrl}${id}`);
   }
 

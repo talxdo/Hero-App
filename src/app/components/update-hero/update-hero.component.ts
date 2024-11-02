@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, input} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs';
@@ -17,8 +17,6 @@ import { HeroFormComponent } from '@components/hero-form/hero-form.component';
 })
 export class UpdateHeroComponent {
 
-  private route = inject(ActivatedRoute);
-  private heroService = inject(HeroService)
-  public hero = toSignal<Hero>(this.route.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
+  public hero = input<Hero | undefined>();
 
 }

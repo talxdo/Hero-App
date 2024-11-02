@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {Component, inject, computed, signal, OnInit} from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { finalize, switchMap } from 'rxjs';
+import {Component, inject, computed, signal, input} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { finalize } from 'rxjs';
 
 import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
@@ -15,23 +14,15 @@ import { SpinnerComponent } from '@shared/spinner/spinner.component';
   templateUrl: './hero-details.component.html',
   styleUrl: './hero-details.component.css'
 })
-export class HeroDetailsComponent implements OnInit{
+export class HeroDetailsComponent {
 
   #loading = signal(false);
   isLoading = computed(() => this.#loading())
 
-  private activatedRoute = inject(ActivatedRoute);
   private heroService = inject(HeroService);
   private router = inject(Router);
 
-  public id = signal<string>('');
-  public hero = toSignal<Hero>(this.activatedRoute.params.pipe(switchMap(({id}) => this.heroService.getHeroById(id))))
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      params => this.id.set(params['id'])
-    )
-  }
+  public hero = input<Hero | undefined>();
 
   goBack(){
     this.router.navigate(['/heroes']);
