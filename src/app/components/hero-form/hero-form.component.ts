@@ -80,7 +80,7 @@ export class HeroFormComponent {
       }
       this.#loading.set(true);
 
-      if(this.title() == 'Actualizar Héroe'){
+      if(this.hero()){
         this.heroService.putHero(hero, id)
         .pipe(finalize(() => this.#loading.set(false)))
         .subscribe({
@@ -89,15 +89,13 @@ export class HeroFormComponent {
       this.resetForm();
       this.router.navigate(['/heroes']);
       }
-      else if(this.title() == 'Crear héroe'){
+      else {
         this.heroService.postHero(hero)
         .pipe(finalize(() => this.#loading.set(false)))
         .subscribe({
           error: err => console.error(err)
         });
         this.resetForm();
-        this.router.navigate(['/heroes']);
-      } else {
         this.router.navigate(['/heroes']);
       }
       
