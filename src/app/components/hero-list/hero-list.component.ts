@@ -14,45 +14,44 @@ import { SpinnerService } from '@shared/spinner/spinner.service';
   standalone: true,
   imports: [CommonModule, RouterLink, BuscarPipe, FormsModule],
   templateUrl: './hero-list.component.html',
-  styleUrl: './hero-list.component.css'
+  styleUrl: './hero-list.component.css',
 })
 export class HeroListComponent implements OnInit {
-
   private heroService = inject(HeroService);
   private spinnerService = inject(SpinnerService);
 
   heroList = signal<Hero[]>([]);
-  searchInput : string = "";
-  criterio : string = "";
+  searchInput: string = '';
+  criterio: string = '';
 
   ngOnInit(): void {
-    this.spinnerService.open()
-    this.heroService.getHeroes()
+    this.spinnerService.open();
+    this.heroService
+      .getHeroes()
       .pipe(
         delay(500),
         finalize(() => this.spinnerService.close())
       )
       .subscribe({
-        next : res => this.heroList.set(res),
-        error: err => console.error(err)
-      }
-      )
+        next: (res) => this.heroList.set(res),
+        error: (err) => console.error(err),
+      });
   }
 
-  deleteHero(id : any){
-    this.spinnerService.open()
-    this.heroService.deleteHero(id)
-    .pipe(
-      delay(500),
-      switchMap(() => {
-        return this.heroService.getHeroes();
-      }),
-      finalize(() => this.spinnerService.close())            
-    )
-    .subscribe({
-      next: res => this.heroList.set(res),
-      error: err => console.error(err)
-    }
-    )}
-
+  deleteHero(id: any) {
+    this.spinnerService.open();
+    this.heroService
+      .deleteHero(id)
+      .pipe(
+        delay(500),
+        switchMap(() => {
+          return this.heroService.getHeroes();
+        }),
+        finalize(() => this.spinnerService.close())
+      )
+      .subscribe({
+        next: (res) => this.heroList.set(res),
+        error: (err) => console.error(err),
+      });
+  }
 }

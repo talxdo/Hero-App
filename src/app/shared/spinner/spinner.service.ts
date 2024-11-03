@@ -1,16 +1,14 @@
-import {inject, Injectable} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import { inject, Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import {SpinnerComponent} from "@shared/spinner/spinner.component";
-
+import { SpinnerComponent } from '@shared/spinner/spinner.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpinnerService {
-  
   private dialogRef: MatDialogRef<SpinnerComponent> | null = null;
-  private dialog = inject(MatDialog)
+  private dialog = inject(MatDialog);
 
   open() {
     if (!this.dialogRef) {

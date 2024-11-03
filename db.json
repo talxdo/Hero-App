@@ -26,11 +26,7 @@
       "nombre": "Iron Man",
       "editorial": "Marvel",
       "poderes": [
-        "Traje de alta tecnología",
-        "Volar",
-        "Disparo de rayos repulsores",
-        "Inteligencia artificial (J.A.R.V.I.S.)",
-        "Resistencia a daños"
+        "Traje de alta tecnología"
       ],
       "identidadSecreta": "Tony Stark",
       "debut": "Tales of Suspense #39 (1963)",
