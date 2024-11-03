@@ -5,14 +5,13 @@ import {delay, finalize, map, take} from 'rxjs';
 
 import {Hero} from '@interfaces/hero';
 import {HeroService} from '@services/hero.service';
-import {SpinnerComponent} from '@shared/spinner/spinner.component';
 import {SpinnerService} from "@shared/spinner/spinner.service";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, SpinnerComponent, CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

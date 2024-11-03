@@ -1,37 +1,36 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { finalize, switchMap } from 'rxjs';
+import { delay, finalize, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { Hero } from '@interfaces/hero';
 import { HeroService } from '@services/hero.service';
 import { BuscarPipe } from '../../pipes/buscar.pipe';
-import { SpinnerComponent } from '@shared/spinner/spinner.component';
+import { SpinnerService } from '@shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-hero-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, BuscarPipe, FormsModule, SpinnerComponent],
+  imports: [CommonModule, RouterLink, BuscarPipe, FormsModule],
   templateUrl: './hero-list.component.html',
   styleUrl: './hero-list.component.css'
 })
 export class HeroListComponent implements OnInit {
 
   private heroService = inject(HeroService);
-
-  #loading = signal(false);
-  isLoading = computed(() => this.#loading())
+  private spinnerService = inject(SpinnerService);
 
   heroList = signal<Hero[]>([]);
   searchInput : string = "";
   criterio : string = "";
 
   ngOnInit(): void {
-    this.#loading.set(true);
+    this.spinnerService.open()
     this.heroService.getHeroes()
       .pipe(
-        finalize(() => this.#loading.set(false))
+        delay(500),
+        finalize(() => this.spinnerService.close())
       )
       .subscribe({
         next : res => this.heroList.set(res),
@@ -41,13 +40,14 @@ export class HeroListComponent implements OnInit {
   }
 
   deleteHero(id : any){
-    this.#loading.set(true);
+    this.spinnerService.open()
     this.heroService.deleteHero(id)
     .pipe(
+      delay(500),
       switchMap(() => {
         return this.heroService.getHeroes();
       }),
-      finalize(() => this.#loading.set(false))            
+      finalize(() => this.spinnerService.close())            
     )
     .subscribe({
       next: res => this.heroList.set(res),
