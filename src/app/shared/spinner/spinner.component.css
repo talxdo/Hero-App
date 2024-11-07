@@ -1,7 +1,0 @@
-mat-card {
-  box-shadow: 0 0 30px 5px #1c1b1b;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}

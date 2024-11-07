@@ -5,14 +5,13 @@ import {delay, finalize, map, take} from 'rxjs';
 
 import {Hero} from '@interfaces/hero';
 import {HeroService} from '@services/hero.service';
-import {SpinnerComponent} from '@shared/spinner/spinner.component';
 import {SpinnerService} from "@shared/spinner/spinner.service";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, SpinnerComponent, CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -26,7 +25,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.open()
     this.sevenRandomHeroes()
-      .pipe(delay(5000), finalize(() => this.loadingService.close()))
+      .pipe(delay(500), finalize(() => this.loadingService.close()))
       .subscribe({
         next: res => this.randomHeroList$.set(res),
         error: err => console.error(err)

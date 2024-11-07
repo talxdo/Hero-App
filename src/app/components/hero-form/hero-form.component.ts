@@ -1,17 +1,17 @@
-import {Component, inject, input, computed, signal} from '@angular/core';
+import {Component, inject, input, computed} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, RequiredValidator, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
-import {finalize} from "rxjs";
+import {delay, finalize} from "rxjs";
 
 import {HeroService} from '@services/hero.service';
 import {Hero} from '@interfaces/hero';
-import {SpinnerComponent} from '@shared/spinner/spinner.component';
+import { SpinnerService } from '@shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-hero-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './hero-form.component.html',
   styleUrl: './hero-form.component.css'
 })
@@ -19,13 +19,11 @@ export class HeroFormComponent {
 
   title = input<string>('');
   hero = input<Hero | undefined>();
-  
-  #loading = signal(false)
-  isLoading = computed(() => this.#loading())
 
   private heroService = inject(HeroService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private spinnerService = inject(SpinnerService);
 
   heroFormulario = computed<FormGroup>(() =>
     new FormGroup({
@@ -79,11 +77,11 @@ export class HeroFormComponent {
         imagen: imagenHero
   
       }
-      this.#loading.set(true);
+      this.spinnerService.open()
 
       if(this.hero()){
         this.heroService.putHero(hero, id)
-        .pipe(finalize(() => this.#loading.set(false)))
+        .pipe(delay(500), finalize(() => this.spinnerService.close()))
         .subscribe({
           error: err => console.error(err)
         });
@@ -92,7 +90,7 @@ export class HeroFormComponent {
       }
       else {
         this.heroService.postHero(hero)
-        .pipe(finalize(() => this.#loading.set(false)))
+        .pipe(delay(500), finalize(() => this.spinnerService.close()))
         .subscribe({
           error: err => console.error(err)
         });
