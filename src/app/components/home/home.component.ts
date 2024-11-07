@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {delay, finalize, map, take} from 'rxjs';
 

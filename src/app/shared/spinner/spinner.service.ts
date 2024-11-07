@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 import {SpinnerComponent} from "@shared/spinner/spinner.component";
-import {Dialog} from "@angular/cdk/dialog";
 
 
 @Injectable({
